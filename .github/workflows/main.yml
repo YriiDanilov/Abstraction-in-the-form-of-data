@@ -1,0 +1,22 @@
+name: build
+on: push
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["18.x"]
+    steps:
+      - name: Get and create repository with code
+        uses: actions/checkout@v3
+      - name: Install version Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version}}
+          cache: "npm"
+      - name: Install dependencies
+        run: make install
+      - name: Run test Jest
+        run: make test
+      - name: Run Eslint
+        run: make lint
