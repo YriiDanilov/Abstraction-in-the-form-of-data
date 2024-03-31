@@ -9,3 +9,5 @@ cover:
 	@npx jest --coverage
 index:
 	@node bin/index.js
+make fix:
+	@npx eslint --fix .
